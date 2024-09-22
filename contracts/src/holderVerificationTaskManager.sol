@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "@openzeppelin-upgrades/contracts/proxy/utils/Initializable.sol";
-import "@openzeppelin-upgrades/contracts/access/OwnableUpgradeable.sol";
+import "openzeppelin-upgrades/proxy/utils/Initializable.sol";
+import "openzeppelin-upgrades/access/OwnableUpgradeable.sol";
 import "eigenlayer/permissions/Pausable.sol";
 import "eigenlayer-middleware/interfaces/IServiceManager.sol";
 import {BLSApkRegistry} from "eigenlayer-middleware/BLSApkRegistry.sol";

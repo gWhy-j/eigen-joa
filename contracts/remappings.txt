@@ -1,3 +1,4 @@
 forge-std/=lib/forge-std/src/
 eigenlayer-middleware/=lib/eigenlayer-middleware/src/
 eigenlayer/=lib/eigenlayer-contracts/src/contracts/
+openzeppelin/=lib/openzeppelin-contracts/contracts/
