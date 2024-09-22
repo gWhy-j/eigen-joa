@@ -1,6 +1,17 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "@openzeppelin-upgrades/contracts/proxy/utils/Initializable.sol";
+import "@openzeppelin-upgrades/contracts/access/OwnableUpgradeable.sol";
+import "eigenlayer/permissions/Pausable.sol";
+import "eigenlayer-middleware/interfaces/IServiceManager.sol";
+import {BLSApkRegistry} from "eigenlayer-middleware/BLSApkRegistry.sol";
+import {RegistryCoordinator} from "eigenlayer-middleware/RegistryCoordinator.sol";
+import {BLSSignatureChecker, IRegistryCoordinator} from "eigenlayer-middleware/BLSSignatureChecker.sol";
+import {OperatorStateRetriever} from "eigenlayer-middleware/OperatorStateRetriever.sol";
+import "eigenlayer-middleware/libraries/BN254.sol";
+import "./interfaces/IHolderVerificationTaskManager.sol";
+
 contract HolderVerificationTaskManager is
     Initializable,
     OwnableUpgradeable,
