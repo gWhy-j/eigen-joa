@@ -1,7 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import {ServiceManagerBase} from "eigenlayer-middleware/ServiceManagerBase.sol";
+import {
+    ServiceManagerBase,
+    IAVSDirectory,
+    IRegistryCoordinator,
+    IStakeRegistry
+} from "eigenlayer-middleware/ServiceManagerBase.sol";
+// import "eigenlayer-middleware/ServiceManagerBase.sol";
 import {IHolderVerificationTaskManager} from "./interfaces/IHolderVerificationTaskManager.sol";
 
 contract HolderVerificationServiceManager is ServiceManagerBase {
@@ -18,14 +24,7 @@ contract HolderVerificationServiceManager is ServiceManagerBase {
         IRegistryCoordinator _registryCoordinator,
         IStakeRegistry _stakeRegistry,
         IHolderVerificationTaskManager _holderVerificationTaskManager
-    )
-        ServiceManagerBase(
-            _avsDirectory,
-            IPaymentCoordinator(address(0)), // inc-sq doesn't need to deal with payments
-            _registryCoordinator,
-            _stakeRegistry
-        )
-    {
+    ) ServiceManagerBase(_avsDirectory, _registryCoordinator, _stakeRegistry) {
         holderVerificationTaskManager = _holderVerificationTaskManager;
     }
 

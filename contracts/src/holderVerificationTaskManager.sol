@@ -1,24 +1,21 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "openzeppelin-upgrades/proxy/utils/Initializable.sol";
-import "openzeppelin-upgrades/access/OwnableUpgradeable.sol";
-import "eigenlayer/permissions/Pausable.sol";
-import "eigenlayer-middleware/interfaces/IServiceManager.sol";
+import {Initializable} from "openzeppelin-upgradeable/proxy/utils/Initializable.sol";
+import {OwnableUpgradeable} from "openzeppelin-upgradeable/access/OwnableUpgradeable.sol";
 import {BLSApkRegistry} from "eigenlayer-middleware/BLSApkRegistry.sol";
 import {RegistryCoordinator} from "eigenlayer-middleware/RegistryCoordinator.sol";
 import {BLSSignatureChecker, IRegistryCoordinator} from "eigenlayer-middleware/BLSSignatureChecker.sol";
 import {OperatorStateRetriever} from "eigenlayer-middleware/OperatorStateRetriever.sol";
-import "eigenlayer-middleware/libraries/BN254.sol";
-import "./interfaces/IHolderVerificationTaskManager.sol";
+import {BN254} from "eigenlayer-middleware/libraries/BN254.sol";
+import {IHolderVerificationTaskManager} from "./interfaces/IHolderVerificationTaskManager.sol";
 
 contract HolderVerificationTaskManager is
     Initializable,
     OwnableUpgradeable,
-    Pausable,
     BLSSignatureChecker,
     OperatorStateRetriever,
-    IIncredibleSquaringTaskManager
+    IHolderVerificationTaskManager
 {
     using BN254 for BN254.G1Point;
 
@@ -65,11 +62,7 @@ contract HolderVerificationTaskManager is
         TASK_RESPONSE_WINDOW_BLOCK = _taskResponseWindowBlock;
     }
 
-    function initialize(IPauserRegistry _pauserRegistry, address initialOwner, address _aggregator, address _generator)
-        public
-        initializer
-    {
-        _initializePauser(_pauserRegistry, UNPAUSE_ALL);
+    function initialize(address initialOwner, address _aggregator, address _generator) public initializer {
         _transferOwnership(initialOwner);
         aggregator = _aggregator;
         generator = _generator;
